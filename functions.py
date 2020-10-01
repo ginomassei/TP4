@@ -63,12 +63,12 @@ def load_text_file(path):
     pass
 
 
-def add_in_order(p, paciente): 
+def add_in_order(p, country): 
     n = len(p)
     pos = n
     for i in range(n):
-        if paciente.hist_clinica < p[i].hist_clinica: 
+        if country.poits < p[i].points: 
             pos = i
             break
 
-    p[pos:pos] = [paciente] 
+    p[pos:pos] = [country] 
