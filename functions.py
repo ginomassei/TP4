@@ -1,4 +1,7 @@
 # ANSI colours functions.
+import io, os
+
+
 def print_red_text(string):
     red_text = '\033[31;1m'
     reset_text = '\033[m'
@@ -49,25 +52,49 @@ class Country:
         elif self.confederation == 5:
             conf = 'OFC'
 
-        s = ''  # Formating the output sring.
-        s += '{:<8}'.format('Confederación: ' + str(conf))
-        s += '{:<15}'.format('Nombre: ' + str(self.name))
-        s += '{:<5}'.format('Puntos: ' + str(self.points))
-        s += '{:<3}'.format('Cantidad de campeonatos ganados: ' + str(self.wins))
-        return s
+        # Formating the output sring.
+        s = "Confederación: {:<10} | Nombre: {:<25} | Puntos: {:<5} | Cantidad de campeonatos ganados: {:<5}"
+        return s.format(conf, self.name, self.points, self.wins)
 
 
 # TP Functions.
 def load_text_file(path):
-    file = open(path, 'rt')
-    pass
+    v = []
+
+    if not os.path.exists(path):
+        return 0  # If the file not exists.
+
+    file = open(path, 'rt')    
+    while True:
+        line = file.readline()
+
+        if line == '':  # If EOF brake.
+            break
+        
+        if line[-1] == '\n':
+            line = line[:-1]
+
+        line = line.split(',')
+        add_in_order(v, make_object(line))
+
+    file.close()
+    return v
+
+
+def make_object(line):
+    confederation = int(line[0])
+    name = line[1]
+    points = int(line[2])
+    wins = int(line[3])
+
+    return Country(confederation, name, points, wins)
 
 
 def add_in_order(p, country): 
     n = len(p)
     pos = n
     for i in range(n):
-        if country.poits < p[i].points: 
+        if country.points < p[i].points: 
             pos = i
             break
 

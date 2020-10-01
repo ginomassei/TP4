@@ -9,10 +9,11 @@ def main():
     option = -1
     while option != 0:
         f.print_blue_text('Opciones: ')
-        print('\n1 - Mostrar el listado completo de países.')
-        print('2 - Mostrár país con mayor cantidad de campeonatos ganados.')
-        print('3 - Mostrar los países que ganaron algún campeonato.')
-        print('4 - Generar nuevo vector con paises de alguna confederación.')
+        print('\n1 - Cargar el archivo.')
+        print('2 - Mostrar el listado completo de países.')
+        print('3 - Mostrár país con mayor cantidad de campeonatos ganados.')
+        print('4 - Mostrar los países que ganaron algún campeonato.')
+        print('5 - Generar nuevo vector con paises de alguna confederación.')
 
         print('0 - Salir.')
 
@@ -22,7 +23,9 @@ def main():
             f.print_blue_text('\nPrograma finalizado...')
 
         if option == 1:
-            pass
+            v = f.load_text_file('paises.csv')
+            for country in v:
+                print(country)
 
         elif option == 2:
             pass
