@@ -28,7 +28,7 @@ def striketrought_print(string):
 
 
 # Class definition.
-class Pais:
+class Country:
     def __init__(self, confederation, name, points, wins):
         self.confederation = confederation
         self.name = name
