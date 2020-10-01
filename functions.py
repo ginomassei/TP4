@@ -1,7 +1,6 @@
-# ANSI colours functions.
-import io, os
+import os
 
-
+# Funciones ANSI para colorear las salidas por terminal.
 def print_red_text(string):
     red_text = '\033[31;1m'
     reset_text = '\033[m'
@@ -30,7 +29,7 @@ def striketrought_print(string):
     print(crossed_text + string + reset_text)
 
 
-# Class definition.
+# Definición de la clase país.
 class Country:
     def __init__(self, confederation, name, points, wins):
         self.confederation = confederation
@@ -39,49 +38,58 @@ class Country:
         self.wins = wins
 
     def __str__(self):
-        # Defining confederation name based in the code.
+        # Decodificación de la confederación en base a su número de clave.
         conf = ''
         if self.confederation == 0:
             conf = 'UEFA'
         elif self.confederation == 1:
-            conf = 'CONCACAF'
+            conf = 'CONMEBOL'
         elif self.confederation == 2:
+            conf = 'CONCACAF'
+        elif self.confederation == 3:
             conf = 'CAF'
         elif self.confederation == 4:
             conf = 'AFC'
         elif self.confederation == 5:
             conf = 'OFC'
 
-        # Formating the output sring.
-        s = "Confederación: {:<10} | Nombre: {:<25} | Puntos: {:<5} | Cantidad de campeonatos ganados: {:<5}"
+        # Formateo del string de salida para mostrar por terminal.
+        s = "Confederación: {:<10} | Nombre: {:<30} | Puntos: {:<5} | Cantidad de campeonatos ganados: {:<5}"
         return s.format(conf, self.name, self.points, self.wins)
 
 
-# TP Functions.
+# Finciones para el desarollo del tp.
 def load_text_file(path):
+    """
+    Carga en memoria un archivo de texto .csv y retorna un arreglo de dos dimensiones con los valores de cada línea.
+    Retorna 0 si no encuentra el archivo.
+    """
     v = []
 
     if not os.path.exists(path):
-        return 0  # If the file not exists.
+        return 0  # Checkea la existencia del archivo, si no existe retorna 0.
 
     file = open(path, 'rt')    
     while True:
         line = file.readline()
 
-        if line == '':  # If EOF brake.
+        if line == '':  # Si encuentra el EOF, termina.
             break
         
-        if line[-1] == '\n':
+        if line[-1] == '\n':  # Remover el caracter de salto de línea.
             line = line[:-1]
 
-        line = line.split(',')
-        add_in_order(v, make_object(line))
+        line = line.split(',')  # Divide cada línea por las comas, para crear así un arreglo con los atributos.
+        v.append(line)  # Segunda dimension del arreglo, ahora es un arreglo de líneas.
 
     file.close()
     return v
 
 
 def make_object(line):
+    """
+    Retorna un objeto del tipo País, tomando como parámetro una línea de datos.
+    """
     confederation = int(line[0])
     name = line[1]
     points = int(line[2])
@@ -90,12 +98,28 @@ def make_object(line):
     return Country(confederation, name, points, wins)
 
 
-def add_in_order(p, country): 
+def add_in_order(p, country):
+    """
+    Tomando un vector, añade un objeto del tipo país en orden al mismo, por puntos.
+    """
     n = len(p)
     pos = n
     for i in range(n):
-        if country.points < p[i].points: 
+        if country.points > p[i].points:  # Comparo en base a los puntos.
             pos = i
             break
 
     p[pos:pos] = [country] 
+
+
+def object_loader(lines):
+    """
+    Transforma las líneas cargadas desde el .csv en objetos de tipo país.
+    Retorna un arreglo de registros tipo País.
+    """
+    v = []
+    for element in lines:
+        country = make_object(element)  # Crea el país.
+        add_in_order(v, country)  # Lo añade de manera ordenada al arreglo.
+
+    return v

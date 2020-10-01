@@ -4,7 +4,7 @@ import functions as f
 def main():
     f.print_blue_text('TP4 Sistema de Gestión de una Competencia Mundial.\n')
     print('-' * 80)
-    
+    v = []
 
     option = -1
     while option != 0:
@@ -18,17 +18,24 @@ def main():
         print('0 - Salir.')
 
         option = int(input('\nIngrese su opción: '))
+        print()
 
         if option == 0:
-            f.print_blue_text('\nPrograma finalizado...')
+            f.print_blue_text('Programa finalizado...')
 
         if option == 1:
             v = f.load_text_file('paises.csv')
-            for country in v:
-                print(country)
+            v = f.object_loader(v)
+
+            f.print_green_text('Archivo cargado en memoria correctamente.')
 
         elif option == 2:
-            pass
+            if len(v) != 0:
+                f.print_blue_text('Listado completo de países: \n')
+                for country in v:
+                    print(country)
+            else:
+                f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
 
         elif option == 3:
             pass
