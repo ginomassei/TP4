@@ -1,4 +1,6 @@
-import os, pickle, country
+import os
+import pickle
+import country
 
 
 # Funciones ANSI para colorear las salidas por terminal.
@@ -35,15 +37,16 @@ def load_text_file_on_memory(path):
     readed_lines = []
 
     if not os.path.exists(path):
-        return readed_lines  # Checkea la existencia del archivo, si no existe, retorna el arreglo vacío.
+        # Checkea la existencia del archivo, si no existe, retorna el arreglo vacío.
+        return readed_lines
 
-    file = open(path, 'rt')    
+    file = open(path, 'rt')
     while True:
         readed_line = file.readline()
 
         if readed_line == '':  # Si encuentra el EOF, termina.
             break
-        
+
         if readed_line[-1] == '\n':  # Remover el caracter de salto de línea.
             readed_line = readed_line[:-1]
 
@@ -73,14 +76,14 @@ def add_in_order(v, r):
     while izq <= der:
         med = (izq + der) // 2
         if v[med].points == r.points:
-            pos = med 
+            pos = med
             break
 
         if r.points > v[med].points:
             der = med - 1
         else:
             izq = med + 1
-        
+
     if izq > der:
         pos = izq
 
@@ -123,12 +126,12 @@ def get_countries_names(countries):
     for country in countries:
         if country.name not in countries:
             countries_names.append(country.name)
-    return countries_names 
+    return countries_names
 
 
 def validate_confederation():
     """
-    Valida que la confederación ingresada por teclado esté dentro de la posibilidades. 
+    Valida que la confederación ingresada por teclado esté dentro de la posibilidades.
     Y retorna su codigo numérico correspondiente.
     """
     available_confederations = ('UEFA', 'CONMEBOL', 'CONCACAF', 'CAF', 'AFC', 'OFC')
@@ -137,7 +140,7 @@ def validate_confederation():
     while confederation not in available_confederations:
         print_red_text('\nLa confederación ingresada no coincide con las cargadas en nuestros registros.')
         confederation = input('Ingrese la confederación de la cual desea obtener los países (Nombre en mayusculas): ')
-    
+
     if confederation == 'UEFA':
         return 0
     elif confederation == 'CONMEBOL':
@@ -157,7 +160,7 @@ def get_countries_per_confederation(confederation_code, countries):
     for country in countries:
         if country.confederation == confederation_code:
             add_in_order(countries_per_confederation, country)
-    
+
     return countries_per_confederation
 
 

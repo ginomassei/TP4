@@ -5,6 +5,7 @@ import os
 def main():
     f.print_blue_text('TP4 Sistema de Gestión de una Competencia Mundial.')
     print('-' * 80)
+    
     countries = []  # Arreglo que va a contener eventualmente los objetos de tipo país.
 
     option = -1
@@ -45,13 +46,14 @@ def main():
                 f.get_wins_per_country(countries)
             else:
                 f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
-        
+
         elif option == 4:
             pass
 
         elif option == 5:
             confederation_code = f.validate_confederation()
-            countries_per_confederation = f.get_countries_per_confederation(confederation_code, countries)
+            countries_per_confederation = f.get_countries_per_confederation(
+                confederation_code, countries)
 
             f.del_atribute('confederation', countries_per_confederation)
 
@@ -65,7 +67,6 @@ def main():
 
             print(f'\nNombre: {path}')
             print(f'Se cargaron {len(countries_per_confederation)} registros al archivo.')
-
 
         print('-' * 80)
 
