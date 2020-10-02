@@ -16,7 +16,7 @@ def main():
         print('4 - Mostrar los países que ganaron algún campeonato.')
         print('5 - Generar nuevo vector con paises de alguna confederación en específico.')
 
-        print('0 - Salir.')
+        print('\n0 - Salir.')
 
         option = int(input('\nIngrese su opción: '))
         print()
@@ -50,7 +50,10 @@ def main():
             pass
 
         elif option == 5:
-            confederation = f.validate_confederation()
+            confederation_code = f.validate_confederation()
+            countries_per_confederation = f.get_countries_per_confederation(confederation_code, countries)
+            for country in countries_per_confederation:
+                    print(country)
 
 
         print('-' * 80)

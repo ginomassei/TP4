@@ -149,6 +149,10 @@ def get_countries_names(countries):
 
 
 def validate_confederation():
+    """
+    Valida que la confederación ingresada por teclado esté dentro de la posibilidades. 
+    Y retorna su codigo numérico correspondiente.
+    """
     available_confederations = ('UEFA', 'CONMEBOL', 'CONCACAF', 'CAF', 'AFC', 'OFC')
     confederation = input('Ingrese la confederación de la cual desea obtener los países (Nombre en mayusculas): ')
 
@@ -156,8 +160,24 @@ def validate_confederation():
         print_red_text('\nLa confederación ingresada no coincide con las cargadas en nuestros registros.')
         confederation = input('Ingrese la confederación de la cual desea obtener los países (Nombre en mayusculas): ')
     
-    return confederation
+    if confederation == 'UEFA':
+        return 0
+    elif confederation == 'CONMEBOL':
+        return 1
+    elif confederation == 'CONCACAF':
+        return 2
+    elif confederation == 'CAF':
+        return 3
+    elif confederation == 'AFC':
+        return 4
+    elif confederation == 'OFC':
+        return 5
 
 
-def get_countries_per_confederation(confederation, countries):
-    pass
+def get_countries_per_confederation(confederation_code, countries):
+    countries_per_confederation = []
+    for country in countries:
+        if country.confederation == confederation_code:
+            add_in_order(countries_per_confederation, country)
+    
+    return countries_per_confederation
