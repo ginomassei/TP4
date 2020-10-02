@@ -29,7 +29,7 @@ def red_string(string):
 
     return red_text + string + reset_text
 
-    
+
 # Definición de la clase país.
 class Country:
     def __init__(self, confederation, name, points, wins):
@@ -146,4 +146,18 @@ def get_countries_names(countries):
         if country.name not in countries:
             countries_names.append(country.name)
     return countries_names 
- 
+
+
+def validate_confederation():
+    available_confederations = ('UEFA', 'CONMEBOL', 'CONCACAF', 'CAF', 'AFC', 'OFC')
+    confederation = input('Ingrese la confederación de la cual desea obtener los países (Nombre en mayusculas): ')
+
+    while confederation not in available_confederations:
+        print_red_text('\nLa confederación ingresada no coincide con las cargadas en nuestros registros.')
+        confederation = input('Ingrese la confederación de la cual desea obtener los países (Nombre en mayusculas): ')
+    
+    return confederation
+
+
+def get_countries_per_confederation(confederation, countries):
+    pass

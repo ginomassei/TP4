@@ -14,7 +14,7 @@ def main():
         print('2 - Mostrar el listado completo de países.')
         print('3 - Mostrár país con mayor cantidad de campeonatos ganados.')
         print('4 - Mostrar los países que ganaron algún campeonato.')
-        print('5 - Generar nuevo vector con paises de alguna confederación.')
+        print('5 - Generar nuevo vector con paises de alguna confederación en específico.')
 
         print('0 - Salir.')
 
@@ -49,10 +49,14 @@ def main():
         elif option == 4:
             pass
 
+        elif option == 5:
+            confederation = f.validate_confederation()
+
+
         print('-' * 80)
 
-        input(f.red_string('Presione cualquier tecla para volver al menú de opciones > '))
-        os.system('cls' if os.name == 'nt' else 'clear')
+        input(f.red_string('Presione la tecla enter para volver al menú de opciones > '))
+        os.system('cls' if os.name == 'nt' else 'clear')  # Limpia el contenido de la terminal.
 
 
 if __name__ == "__main__":
