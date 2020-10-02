@@ -23,13 +23,6 @@ def print_blue_text(string):
     print(blue_text + string + reset_text)
 
 
-def striketrought_print(string):
-    crossed_text = '\033[09;37;37m'
-    reset_text = '\033[m'
-
-    print(crossed_text + string + reset_text)
-
-
 # Definición de la clase país.
 class Country:
     def __init__(self, confederation, name, points, wins):
@@ -40,54 +33,50 @@ class Country:
 
     def __str__(self):
         # Decodificación de la confederación en base a su número de clave.
-        conf = ''
+        confederation_as_string = ''
         if self.confederation == 0:
-            conf = 'UEFA'
+            confederation_as_string = 'UEFA'
         elif self.confederation == 1:
-            conf = 'CONMEBOL'
+            confederation_as_string = 'CONMEBOL'
         elif self.confederation == 2:
-            conf = 'CONCACAF'
+            confederation_as_string = 'CONCACAF'
         elif self.confederation == 3:
-            conf = 'CAF'
+            confederation_as_string = 'CAF'
         elif self.confederation == 4:
-            conf = 'AFC'
+            confederation_as_string = 'AFC'
         elif self.confederation == 5:
-            conf = 'OFC'
+            confederation_as_string = 'OFC'
 
         # Formateo del string de salida para mostrar por terminal.
         s = "Confederación: {:<10} | Nombre: {:<30} | Puntos: {:<5} | Cantidad de campeonatos ganados: {:<5}"
-        return s.format(conf, self.name, self.points, self.wins)
+        return s.format(confederation_as_string, self.name, self.points, self.wins)
 
 
 # Finciones para el desarollo del tp.
-def load_text_file(path):
-    """
-    Carga en memoria un archivo de texto .csv y retorna un arreglo de dos dimensiones con los valores de cada línea.
-    Retorna 0 si no encuentra el archivo.
-    """
-    v = []
+def load_text_file_on_memory(path):
+    readed_lines = []
 
     if not os.path.exists(path):
         return 0  # Checkea la existencia del archivo, si no existe retorna 0.
 
     file = open(path, 'rt')    
     while True:
-        line = file.readline()
+        readed_line = file.readline()
 
-        if line == '':  # Si encuentra el EOF, termina.
+        if readed_line == '':  # Si encuentra el EOF, termina.
             break
         
-        if line[-1] == '\n':  # Remover el caracter de salto de línea.
-            line = line[:-1]
+        if readed_line[-1] == '\n':  # Remover el caracter de salto de línea.
+            readed_line = readed_line[:-1]
 
-        line = line.split(',')  # Divide cada línea por las comas, para crear así un arreglo con los atributos.
-        v.append(line)  # Segunda dimension del arreglo, ahora es un arreglo de líneas.
+        readed_line_as_list = readed_line.split(',')
+        readed_lines.append(readed_line_as_list)
 
     file.close()
-    return v
+    return readed_lines
 
 
-def make_object(line):
+def get_country(line):
     """
     Retorna un objeto del tipo País, tomando como parámetro una línea de datos.
     """
@@ -113,17 +102,17 @@ def add_in_order(p, country):
     p[pos:pos] = [country] 
 
 
-def object_loader(lines):
+def get_countries(readed_lines):
     """
     Transforma las líneas cargadas desde el .csv en objetos de tipo país.
     Retorna un arreglo de registros tipo País.
     """
-    v = []
-    for element in lines:
-        country = make_object(element)  # Crea el país.
-        add_in_order(v, country)  # Lo añade de manera ordenada al arreglo.
+    countries = []
+    for line in readed_lines:
+        country = get_country(line)  # Crea el país.
+        add_in_order(countries, country)  # Lo añade de manera ordenada al arreglo.
 
-    return v
+    return countries
 
 
 def count_wins(v):
@@ -134,10 +123,7 @@ def count_wins(v):
     n = len(countries)
 
     wins = [0] * n
-    
     counts = [[countries[i], wins[i]] for i in range(n)]
-
-    print(counts)
 
     for country in v:
         pass

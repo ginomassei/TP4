@@ -24,7 +24,7 @@ def main():
             f.print_blue_text('Programa finalizado...')
 
         if option == 1:
-            v = f.load_text_file('paises.csv')
+            v = f.load_text_file_on_memory('paises.csv')
             v = f.object_loader(v)
 
             f.print_green_text('Archivo cargado en memoria correctamente.')
