@@ -1,4 +1,4 @@
-import os, pickle
+import os, pickle, country
 
 
 # Funciones ANSI para colorear las salidas por terminal.
@@ -30,41 +30,12 @@ def red_string(string):
     return red_text + string + reset_text
 
 
-# Definición de la clase país.
-class Country:
-    def __init__(self, confederation, name, points, wins):
-        self.confederation = confederation
-        self.name = name
-        self.points = points
-        self.wins = wins
-
-    def __str__(self):
-        # Decodificación de la confederación en base a su número de clave.
-        confederation_as_string = ''
-        if self.confederation == 0:
-            confederation_as_string = 'UEFA'
-        elif self.confederation == 1:
-            confederation_as_string = 'CONMEBOL'
-        elif self.confederation == 2:
-            confederation_as_string = 'CONCACAF'
-        elif self.confederation == 3:
-            confederation_as_string = 'CAF'
-        elif self.confederation == 4:
-            confederation_as_string = 'AFC'
-        elif self.confederation == 5:
-            confederation_as_string = 'OFC'
-
-        # Formateo del string de salida para mostrar por terminal.
-        s = "Confederación: {:<10} | Nombre: {:<30} | Puntos: {:<5} | Cantidad de campeonatos ganados: {:<5}"
-        return s.format(confederation_as_string, self.name, self.points, self.wins)
-
-
-# Finciones para el desarollo del tp.
+# Funciones para el desarollo del tp.
 def load_text_file_on_memory(path):
     readed_lines = []
 
     if not os.path.exists(path):
-        return 0  # Checkea la existencia del archivo, si no existe retorna 0.
+        return readed_lines  # Checkea la existencia del archivo, si no existe, retorna el arreglo vacío.
 
     file = open(path, 'rt')    
     while True:
@@ -92,21 +63,28 @@ def get_country(line):
     points = int(line[2])
     wins = int(line[3])
 
-    return Country(confederation, name, points, wins)
+    return country.Country(confederation, name, points, wins)
 
 
-def add_in_order(p, country):
-    """
-    Tomando un vector, añade un objeto del tipo país en orden al mismo, por puntos.
-    """
-    n = len(p)
-    pos = n
-    for i in range(n):
-        if country.points > p[i].points:  # Comparo en base a los puntos.
-            pos = i
+def add_in_order(v, r):
+    izq, der = 0, len(v) - 1
+    pos = 0
+
+    while izq <= der:
+        med = (izq + der) // 2
+        if v[med].points == r.points:
+            pos = med 
             break
 
-    p[pos:pos] = [country] 
+        if r.points > v[med].points:
+            der = med - 1
+        else:
+            izq = med + 1
+        
+    if izq > der:
+        pos = izq
+
+    v[pos:pos] = [r]
 
 
 def get_countries(readed_lines):
