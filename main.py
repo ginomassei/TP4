@@ -5,7 +5,7 @@ import os
 def main():
     f.print_blue_text('TP4 Sistema de Gestión de una Competencia Mundial.')
     print('-' * 80)
-    
+
     countries = []  # Arreglo que va a contener eventualmente los objetos de tipo país.
 
     option = -1
@@ -52,8 +52,7 @@ def main():
 
         elif option == 5:
             confederation_code = f.validate_confederation()
-            countries_per_confederation = f.get_countries_per_confederation(
-                confederation_code, countries)
+            countries_per_confederation = f.get_countries_per_confederation(confederation_code, countries)
 
             f.del_atribute('confederation', countries_per_confederation)
 
