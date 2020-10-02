@@ -1,14 +1,15 @@
 import functions as f
+import os
 
 
 def main():
-    f.print_blue_text('TP4 Sistema de Gestión de una Competencia Mundial.\n')
+    f.print_blue_text('TP4 Sistema de Gestión de una Competencia Mundial.')
     print('-' * 80)
-    v = []
+    countries = []  # Arreglo que va a contener eventualmente los objetos de tipo país.
 
     option = -1
     while option != 0:
-        f.print_blue_text('Opciones: ')
+        f.print_blue_text('Menú de opciones: ')
         print('\n1 - Cargar el archivo.')
         print('2 - Mostrar el listado completo de países.')
         print('3 - Mostrár país con mayor cantidad de campeonatos ganados.')
@@ -22,24 +23,26 @@ def main():
 
         if option == 0:
             f.print_blue_text('Programa finalizado...')
+            print('-' * 80)
+            return 0
 
         if option == 1:
-            v = f.load_text_file_on_memory('paises.csv')
-            v = f.object_loader(v)
+            countries = f.load_text_file_on_memory('paises.csv')
+            countries = f.get_countries(countries)
 
             f.print_green_text('Archivo cargado en memoria correctamente.')
 
         elif option == 2:
-            if len(v) != 0:
+            if len(countries) != 0:
                 f.print_blue_text('Listado completo de países: \n')
-                for country in v:
+                for country in countries:
                     print(country)
             else:
                 f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
 
         elif option == 3:
-            if len(v) != 0:
-                f.count_wins(v)
+            if len(countries) != 0:
+                f.get_wins_per_country(countries)
             else:
                 f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
         
@@ -47,6 +50,9 @@ def main():
             pass
 
         print('-' * 80)
+
+        input(f.red_string('Presione cualquier tecla para volver al menú de opciones > '))
+        os.system('cls' if os.name == 'nt' else 'clear')
 
 
 if __name__ == "__main__":

@@ -23,6 +23,13 @@ def print_blue_text(string):
     print(blue_text + string + reset_text)
 
 
+def red_string(string):
+    red_text = '\033[31;1m'
+    reset_text = '\033[m'
+
+    return red_text + string + reset_text
+
+    
 # Definición de la clase país.
 class Country:
     def __init__(self, confederation, name, points, wins):
@@ -115,28 +122,28 @@ def get_countries(readed_lines):
     return countries
 
 
-def count_wins(v):
+def get_wins_per_country(v):
     """
     Retorna un vector de conteos, con la cantidad de campeonatos ganados por país.
     """
-    countries = list_countries(v)
+    countries = get_countries_names(v)
     n = len(countries)
 
     wins = [0] * n
-    counts = [[countries[i], wins[i]] for i in range(n)]
+    wins_per_country = [[countries[i], wins[i]] for i in range(n)]
 
     for country in v:
         pass
 
 
-def list_countries(v):
+def get_countries_names(countries):
     """
     Genera un arreglo con los nombres de los países involucrados.
     """
-    countries = []
+    countries_names = []
 
-    for country in v:
-        if country.name not in v:
-            countries.append(country.name)
-    return countries   
+    for country in countries:
+        if country.name not in countries:
+            countries_names.append(country.name)
+    return countries_names 
  
