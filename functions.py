@@ -1,5 +1,6 @@
 import os
 
+
 # Funciones ANSI para colorear las salidas por terminal.
 def print_red_text(string):
     red_text = '\033[31;1m'
@@ -123,3 +124,33 @@ def object_loader(lines):
         add_in_order(v, country)  # Lo añade de manera ordenada al arreglo.
 
     return v
+
+
+def count_wins(v):
+    """
+    Retorna un vector de conteos, con la cantidad de campeonatos ganados por país.
+    """
+    countries = list_countries(v)
+    n = len(countries)
+
+    wins = [0] * n
+    
+    counts = [[countries[i], wins[i]] for i in range(n)]
+
+    print(counts)
+
+    for country in v:
+        pass
+
+
+def list_countries(v):
+    """
+    Genera un arreglo con los nombres de los países involucrados.
+    """
+    countries = []
+
+    for country in v:
+        if country.name not in v:
+            countries.append(country.name)
+    return countries   
+ 

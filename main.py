@@ -38,7 +38,10 @@ def main():
                 f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
 
         elif option == 3:
-            pass
+            if len(v) != 0:
+                f.count_wins(v)
+            else:
+                f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
         
         elif option == 4:
             pass
