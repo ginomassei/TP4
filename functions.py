@@ -190,3 +190,8 @@ def create_binary_file(array, path):
         pickle.dump(element, file)
 
     file.close()
+
+
+def del_atribute(atribute, array):
+    for element in array:
+        delattr(element, atribute)
