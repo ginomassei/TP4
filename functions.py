@@ -1,4 +1,4 @@
-import os
+import os, pickle
 
 
 # Funciones ANSI para colorear las salidas por terminal.
@@ -181,3 +181,12 @@ def get_countries_per_confederation(confederation_code, countries):
             add_in_order(countries_per_confederation, country)
     
     return countries_per_confederation
+
+
+def create_binary_file(array, path):
+    file = open(path, 'wb')
+
+    for element in array:
+        pickle.dump(element, file)
+
+    file.close()

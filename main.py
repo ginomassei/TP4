@@ -52,8 +52,14 @@ def main():
         elif option == 5:
             confederation_code = f.validate_confederation()
             countries_per_confederation = f.get_countries_per_confederation(confederation_code, countries)
-            for country in countries_per_confederation:
-                    print(country)
+
+            path = f'clasificacion{confederation_code}.dat'
+            f.create_binary_file(countries_per_confederation, path)
+
+            f.print_green_text('\nArchivo generado correctamente.')
+            
+            print(f'\nNombre: {path}')
+            print(f'Se cargaron {len(countries_per_confederation)} registros al archivo.')
 
 
         print('-' * 80)
