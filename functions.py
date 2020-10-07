@@ -117,6 +117,18 @@ def get_wins_per_country(v):
         pass
 
 
+def get_most_winning_country(countries):
+    max_wins = 0
+    most_winning_country = None
+
+    for country in countries:
+        if country.wins > max_wins:
+            most_winning_country = country
+            max_wins = country.wins
+        
+    return most_winning_country
+
+    
 def get_countries_names(countries):
     """
     Genera un arreglo con los nombres de los países involucrados.

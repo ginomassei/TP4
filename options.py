@@ -6,11 +6,13 @@ def option0():
     print('-' * 80)
 
 
-def option1(countries):
+def option1():
     countries = f.load_text_file_on_memory('paises.csv')
     countries = f.get_countries(countries)
 
     f.print_green_text('Archivo cargado en memoria correctamente.')
+
+    return countries
 
 
 def option2(countries):
@@ -25,7 +27,11 @@ def option2(countries):
 
 def option3(countries):
     if len(countries) != 0:
-        f.get_wins_per_country(countries)
+        most_winning_country = f.get_most_winning_country(countries)
+        f.print_green_text('País encontrado!')
+        print(f'\nEl país con mayor cantidad de partidos ganados es: ')
+        print(most_winning_country)
+
     else:
         f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
 
@@ -50,3 +56,7 @@ def option5(countries):
 
     print(f'\nNombre: {path}')
     print(f'Se cargaron {len(countries_per_confederation)} registros al archivo.')
+
+
+def option6():
+    confederation = input('Ingrese la confederación a buscar: ')

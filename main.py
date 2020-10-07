@@ -1,5 +1,6 @@
-import functions as f
 import os
+
+import functions as f
 from options import *
 
 
@@ -28,7 +29,7 @@ def main():
             return 0
 
         if option == 1:
-            option1(countries)
+            countries = option1()
 
         elif option == 2:
             option2(countries)
@@ -41,6 +42,9 @@ def main():
 
         elif option == 5:
             option5(countries)
+
+        elif option == 6:
+            option6()
 
         print('-' * 80)
 
