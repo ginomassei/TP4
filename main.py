@@ -1,5 +1,6 @@
 import functions as f
 import os
+from options import *
 
 
 def main():
@@ -23,49 +24,23 @@ def main():
         print()
 
         if option == 0:
-            f.print_blue_text('Programa finalizado...')
-            print('-' * 80)
+            option0()
             return 0
 
         if option == 1:
-            countries = f.load_text_file_on_memory('paises.csv')
-            countries = f.get_countries(countries)
-
-            f.print_green_text('Archivo cargado en memoria correctamente.')
+            option1(countries)
 
         elif option == 2:
-            if len(countries) != 0:
-                f.print_blue_text('Listado completo de países: \n')
-                for country in countries:
-                    print(country)
-            else:
-                f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
+            option2(countries)
 
         elif option == 3:
-            if len(countries) != 0:
-                f.get_wins_per_country(countries)
-            else:
-                f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
+            option3(countries)
 
         elif option == 4:
-            pass
+            option4()
 
         elif option == 5:
-            confederation_code = f.validate_confederation()
-            countries_per_confederation = f.get_countries_per_confederation(confederation_code, countries)
-
-            f.del_atribute('confederation', countries_per_confederation)
-
-            for i in countries_per_confederation:
-                print(i)
-
-            path = f'clasificacion{confederation_code}.dat'
-            f.create_binary_file(countries_per_confederation, path)
-
-            f.print_green_text('\nArchivo generado correctamente.')
-
-            print(f'\nNombre: {path}')
-            print(f'Se cargaron {len(countries_per_confederation)} registros al archivo.')
+            option5(countries)
 
         print('-' * 80)
 
