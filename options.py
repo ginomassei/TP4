@@ -28,6 +28,7 @@ def option2(countries):
 def option3(countries):
     if len(countries) != 0:
         most_winning_country = f.get_most_winning_country(countries)
+
         f.print_green_text('País encontrado!')
         print(f'\nEl país con mayor cantidad de partidos ganados es: ')
         print(most_winning_country)
@@ -42,7 +43,7 @@ def option4():
 
 def option5(countries):
     confederation_code = f.validate_confederation()
-    countries_per_confederation = f.get_countries_per_confederation(confederation_code, countries)
+    countries_per_confederation = f.get_countries_in_confederation(confederation_code, countries)
 
     f.delete_atribute('confederation', countries_per_confederation)
 
@@ -59,4 +60,4 @@ def option5(countries):
 
 
 def option6():
-    confederation = input('Ingrese la confederación a buscar: ')
+    pass

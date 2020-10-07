@@ -115,6 +115,15 @@ def get_most_winning_country(countries):
     return most_winning_country
 
 
+def get_wining_countries_per_confederation(countries):
+    uefa = get_countries_in_confederation(0, countries)
+    conmebol = get_countries_in_confederation(1, countries)
+    concacaf = get_countries_in_confederation(2, countries)
+    caf = get_countries_in_confederation(3, countries)
+    afc = get_countries_in_confederation(4, countries)
+    ofc = get_countries_in_confederation(5, countries)
+
+
 def get_countries_names(countries):
     """
     Genera un arreglo con los nombres de los países involucrados.
@@ -153,13 +162,13 @@ def validate_confederation():
         return 5
 
 
-def get_countries_per_confederation(confederation_code, countries):
-    countries_per_confederation = []
+def get_countries_in_confederation(confederation_code, countries):
+    countries_in_confederation = []
     for country in countries:
         if country.confederation == confederation_code:
-            add_in_order(countries_per_confederation, country)
+            add_in_order(countries_in_confederation, country)
 
-    return countries_per_confederation
+    return countries_in_confederation
 
 
 def create_binary_file(array, path):
