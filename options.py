@@ -38,7 +38,7 @@ def option5(countries):
     confederation_code = f.validate_confederation()
     countries_per_confederation = f.get_countries_per_confederation(confederation_code, countries)
 
-    f.del_atribute('confederation', countries_per_confederation)
+    f.delete_atribute('confederation', countries_per_confederation)
 
     for i in countries_per_confederation:
         print(i)
