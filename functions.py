@@ -103,20 +103,6 @@ def get_countries(readed_lines):
     return countries
 
 
-def get_wins_per_country(v):
-    """
-    Retorna un vector de conteos, con la cantidad de campeonatos ganados por país.
-    """
-    countries = get_countries_names(v)
-    n = len(countries)
-
-    wins = [0] * n
-    wins_per_country = [[countries[i], wins[i]] for i in range(n)]
-
-    for country in v:
-        pass
-
-
 def get_most_winning_country(countries):
     max_wins = 0
     most_winning_country = None
@@ -128,7 +114,7 @@ def get_most_winning_country(countries):
         
     return most_winning_country
 
-    
+
 def get_countries_names(countries):
     """
     Genera un arreglo con los nombres de los países involucrados.
