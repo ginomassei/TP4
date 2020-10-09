@@ -115,13 +115,27 @@ def get_most_winning_country(countries):
     return most_winning_country
 
 
-def get_wining_countries_per_confederation(countries):
-    uefa = get_countries_in_confederation(0, countries)
-    conmebol = get_countries_in_confederation(1, countries)
-    concacaf = get_countries_in_confederation(2, countries)
-    caf = get_countries_in_confederation(3, countries)
-    afc = get_countries_in_confederation(4, countries)
-    ofc = get_countries_in_confederation(5, countries)
+def get_winning_countries_per_confederation(countries):
+    uefa = count_winning_countries(get_countries_in_confederation(0, countries))
+    conmebol = count_winning_countries(get_countries_in_confederation(1, countries))
+    concacaf = count_winning_countries(get_countries_in_confederation(2, countries))
+    caf = count_winning_countries(get_countries_in_confederation(3, countries))
+    afc = count_winning_countries(get_countries_in_confederation(4, countries))
+    ofc = count_winning_countries(get_countries_in_confederation(5, countries))
+
+    return [uefa, conmebol, concacaf, caf, afc, ofc]
+
+def count_winning_countries(countries):
+
+    c = 0
+
+    for country in countries:
+
+        if country.wins > 0:
+
+            c += 1
+
+    return c
 
 
 def get_countries_names(countries):
@@ -142,24 +156,24 @@ def validate_confederation():
     Y retorna su codigo numérico correspondiente.
     """
     available_confederations = ('UEFA', 'CONMEBOL', 'CONCACAF', 'CAF', 'AFC', 'OFC')
-    confederation = input('Ingrese la confederación de la cual desea obtener los países (Nombre en mayusculas): ')
+    confederation = input('Ingrese la confederación de la cual desea obtener los datos (Nombre en mayusculas): ')
 
     while confederation not in available_confederations:
         print_red_text('\nLa confederación ingresada no coincide con las cargadas en nuestros registros.')
-        confederation = input('Ingrese la confederación de la cual desea obtener los países (Nombre en mayusculas): ')
+        confederation = input('Ingrese la confederación de la cual desea obtener los datos (Nombre en mayusculas): ')
 
     if confederation == 'UEFA':
-        return 0
+        return 0, confederation
     elif confederation == 'CONMEBOL':
-        return 1
+        return 1, confederation
     elif confederation == 'CONCACAF':
-        return 2
+        return 2, confederation
     elif confederation == 'CAF':
-        return 3
+        return 3, confederation
     elif confederation == 'AFC':
-        return 4
+        return 4, confederation
     elif confederation == 'OFC':
-        return 5
+        return 5, confederation
 
 
 def get_countries_in_confederation(confederation_code, countries):
@@ -183,3 +197,17 @@ def create_binary_file(array, path):
 def delete_atribute(atribute, array):
     for element in array:
         delattr(element, atribute)
+
+def get_countries_from_file(path):
+
+    countries = []
+
+    file = open(path, 'rb')
+    size = os.path.getsize(path)
+
+    while file.tell() < size:
+        countries.append(pickle.load(file))
+
+    file.close()
+
+    return countries

@@ -15,9 +15,11 @@ def main():
         f.print_blue_text('Menú de opciones: ')
         print('\n1 - Cargar el archivo.')
         print('2 - Mostrar el listado completo de países.')
-        print('3 - Mostrár país con mayor cantidad de campeonatos ganados.')
+        print('3 - Mostrar país con mayor cantidad de campeonatos ganados.')
         print('4 - Mostrar los países que ganaron algún campeonato.')
         print('5 - Generar nuevo vector con paises de alguna confederación en específico.')
+        print('6 - Buscar archivo de clasificación de una confederación.')
+
 
         print('\n0 - Salir.')
 
@@ -38,13 +40,13 @@ def main():
             option3(countries)
 
         elif option == 4:
-            option4()
+            option4(countries)
 
         elif option == 5:
             option5(countries)
 
         elif option == 6:
-            option6()
+            option6(countries)
 
         print('-' * 80)
 

@@ -7,21 +7,31 @@ class Country:
         self.wins = wins
 
     def __str__(self):
-        # Decodificación de la confederación en base a su número de clave.
-        confederation_as_string = ''
-        if self.confederation == 0:
-            confederation_as_string = 'UEFA'
-        elif self.confederation == 1:
-            confederation_as_string = 'CONMEBOL'
-        elif self.confederation == 2:
-            confederation_as_string = 'CONCACAF'
-        elif self.confederation == 3:
-            confederation_as_string = 'CAF'
-        elif self.confederation == 4:
-            confederation_as_string = 'AFC'
-        elif self.confederation == 5:
-            confederation_as_string = 'OFC'
 
-        # Formateo del string de salida para mostrar por terminal.
-        s = "Confederación: {:<10} | Nombre: {:<30} | Puntos: {:<5} | Cantidad de campeonatos ganados: {:<5}"
-        return s.format(confederation_as_string, self.name, self.points, self.wins)
+        #Se verifica que el registro tenga el atributo confederación para hacer el print completo
+        if hasattr(self, 'confederation'):
+
+            # Decodificación de la confederación en base a su número de clave.
+            confederation_as_string = ''
+            if self.confederation == 0:
+                confederation_as_string = 'UEFA'
+            elif self.confederation == 1:
+                confederation_as_string = 'CONMEBOL'
+            elif self.confederation == 2:
+                confederation_as_string = 'CONCACAF'
+            elif self.confederation == 3:
+                confederation_as_string = 'CAF'
+            elif self.confederation == 4:
+                confederation_as_string = 'AFC'
+            elif self.confederation == 5:
+                confederation_as_string = 'OFC'
+
+            # Formateo del string de salida para mostrar por terminal.
+            s = "Confederación: {:<10} | Nombre: {:<30} | Puntos: {:<5} | Cantidad de campeonatos ganados: {:<5}"
+            return s.format(confederation_as_string, self.name, self.points, self.wins)
+
+        else:
+
+            # Formateo del string de salida para mostrar por terminal.
+            s = "Nombre: {:<30} | Puntos: {:<5} | Cantidad de campeonatos ganados: {:<5}"
+            return s.format(self.name, self.points, self.wins)
