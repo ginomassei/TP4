@@ -125,12 +125,10 @@ def get_winning_countries_per_confederation(countries):
 
     return [uefa, conmebol, concacaf, caf, afc, ofc]
 
+
 def count_winning_countries(countries):
-
     c = 0
-
     for country in countries:
-
         if country.wins > 0:
 
             c += 1
