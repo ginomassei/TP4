@@ -20,7 +20,6 @@ def main():
         print('5 - Generar nuevo vector con paises de alguna confederación en específico.')
         print('6 - Buscar archivo de clasificación de una confederación.')
 
-
         print('\n0 - Salir.')
 
         option = int(input('\nIngrese su opción: '))
@@ -47,6 +46,9 @@ def main():
 
         elif option == 6:
             option6(countries)
+
+        else:
+            f.print_red_text('Opción no válida')
 
         print('-' * 80)
 

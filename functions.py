@@ -198,8 +198,8 @@ def delete_atribute(atribute, array):
     for element in array:
         delattr(element, atribute)
 
-def get_countries_from_file(path):
 
+def get_countries_from_file(path):
     countries = []
 
     file = open(path, 'rb')
