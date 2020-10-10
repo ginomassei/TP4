@@ -95,7 +95,7 @@ def option6(countries):
 
             f.create_binary_file(countries_per_confederation, path)
 
-            f.print_blue_text(f'\nEl archivo de la confederación {confederation_name} no había sido generado.')
+            f.print_red_text(f'\nEl archivo de la confederación {confederation_name} no había sido generado.')
 
             f.print_green_text('\nArchivo generado correctamente.')
 
@@ -103,9 +103,7 @@ def option6(countries):
             print(f'Se cargaron {len(countries_per_confederation)} registros al archivo.')
 
         else:
-
             file_countries = f.get_countries_from_file(path)
-
             f.print_green_text('Archivo encontrado\n')
             f.print_blue_text(f'Clasificación de la confederación {confederation_name}:\n')
 
