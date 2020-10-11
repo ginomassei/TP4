@@ -112,3 +112,30 @@ def option6(countries):
 
     else:
         f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
+
+def option7(countries):
+
+    if len(countries) != 0:
+
+        fixture = f.new_fixture(countries)
+
+        f.print_blue_text('\nEl fixture ha sido generado correctamente.')
+
+        return fixture
+
+    else:
+        f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
+
+def option8(fixture, countries):
+
+    if len(countries) != 0:
+
+        if len(fixture) != 0:
+
+            f.search_in_fixture(fixture, countries)
+
+        else:
+            f.print_red_text('El fixture del mundial aún no ha sido generado, por favor cárguelo con la opción 7.')
+
+    else:
+        f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')

@@ -1,6 +1,7 @@
 import os
 import pickle
 import country
+import random
 
 
 # Funciones ANSI para colorear las salidas por terminal.
@@ -209,3 +210,92 @@ def get_countries_from_file(path):
     file.close()
 
     return countries
+
+def validate_and_return_country(text, countries):
+
+    name = input(text)
+    validado = False
+
+    while validado == False:
+
+        for i in countries:
+
+            if name == i:
+
+                print_green_text('\nPaís validado.')
+                return i
+
+        print_red_text('\nEl país ingresado no existe.')
+        name = input(text)
+
+
+
+def new_fixture(countries):
+
+    fixture = 4 * [None]
+
+    #Generamos un arreglo solo con los nombres de los países para poder manipularlos mejor.
+    nombres = get_countries_names(countries)
+
+    for i in range(len(fixture)):
+
+        fixture[i] = 8 * [None]
+
+    print(fixture)
+
+    org = validate_and_return_country('Ingrese el nombre del país organizador: ', nombres)
+
+    fixture[0][0] = org
+    nombres.remove(org)
+
+    '''
+    Obtenemos los cabeza de serie (el arreglo original se ordenó previamente por puntaje de mayor a menor) y los
+    eliminamos para evitar repeticiones.
+    El índice del país a retornar es siempre 0 ya que se van desplazando los elementos restantes.
+    '''
+
+    for i in range(7):
+
+        fixture[0][i+1] = nombres.pop(0)
+
+    '''
+    Obtenemos los países restantes de forma aleatoria entre los 28 mejores.
+    Para ello generamos un arreglo que contenga a estos 28 mejores.
+    '''
+
+    best_countries = []
+
+    for i in range(28):
+
+        best_countries.append(nombres.pop(0))
+
+
+    for i in range(1, len(fixture)):
+
+        for j in range(len(fixture[i])):
+
+            picked_country = random.choice(best_countries)
+            fixture[i][j] = picked_country
+            best_countries.remove(picked_country)
+
+    return fixture
+
+def search_in_fixture(fixture, countries):
+
+    #Generamos un arreglo solo con los nombres de los países para poder manipularlos mejor.
+    nombres = get_countries_names(countries)
+
+    country = validate_and_return_country('Ingrese el nombre del país a buscar: ', nombres)
+
+    groups = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')
+
+    for i in range(len(fixture)):
+
+        for j in range(len(fixture[i])):
+
+            if fixture[i][j] == country:
+
+                print_green_text(f'\nPaís encontrado. {country} pertenece al grupo {groups[j]}')
+                return
+
+    print_green_text(f'\nLamentablemente, {country} no participa del mundial este año.')
