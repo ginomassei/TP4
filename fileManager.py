@@ -74,6 +74,13 @@ def get_countries_from_file(path):
     return countries
 
 
-def delete_atribute(atribute, array):
-    for element in array:
-        delattr(element, atribute)
+def delete_atribute(countries):
+    countries_without_confederation = []
+    for i in countries:
+        name = i.name
+        points = i.points
+        wins = i.wins
+
+        country_without_confederation = country.CountryWithoutConfederation(name, points, wins)
+        add_in_order(countries_without_confederation, country_without_confederation)
+    return countries_without_confederation
