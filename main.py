@@ -1,6 +1,4 @@
 import os
-
-import functions as f
 from options import *
 
 
@@ -9,7 +7,7 @@ def main():
     print('-' * 80)
 
     countries = []  # Arreglo que va a contener eventualmente los objetos de tipo país.
-    fixture = [] #Arreglo que va a contener el fixture del mundial.
+    fixture = []  # Arreglo que va a contener el fixture del mundial.
 
     option = -1
     while option != 0:

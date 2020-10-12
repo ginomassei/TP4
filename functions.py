@@ -2,6 +2,7 @@ import os
 import pickle
 import country
 import random
+import fileManager
 
 
 # Funciones ANSI para colorear las salidas por terminal.
@@ -34,76 +35,6 @@ def red_string(string):
 
 
 # Funciones para el desarollo del tp.
-def load_text_file_on_memory(path):
-    readed_lines = []
-
-    if not os.path.exists(path):
-        # Checkea la existencia del archivo, si no existe, retorna el arreglo vacío.
-        return readed_lines
-
-    file = open(path, 'rt')
-    while True:
-        readed_line = file.readline()
-
-        if readed_line == '':  # Si encuentra el EOF, termina.
-            break
-
-        if readed_line[-1] == '\n':  # Remover el caracter de salto de línea.
-            readed_line = readed_line[:-1]
-
-        readed_line_as_list = readed_line.split(',')
-        readed_lines.append(readed_line_as_list)
-
-    file.close()
-    return readed_lines
-
-
-def get_country(line):
-    """
-    Retorna un objeto del tipo País, tomando como parámetro una línea de datos.
-    """
-    confederation = int(line[0])
-    name = line[1]
-    points = int(line[2])
-    wins = int(line[3])
-
-    return country.Country(confederation, name, points, wins)
-
-
-def add_in_order(v, r):
-    izq, der = 0, len(v) - 1
-    pos = 0
-
-    while izq <= der:
-        med = (izq + der) // 2
-        if v[med].points == r.points:
-            pos = med
-            break
-
-        if r.points > v[med].points:
-            der = med - 1
-        else:
-            izq = med + 1
-
-    if izq > der:
-        pos = izq
-
-    v[pos:pos] = [r]
-
-
-def get_countries(readed_lines):
-    """
-    Transforma las líneas cargadas desde el .csv en objetos de tipo país.
-    Retorna un arreglo de registros tipo País.
-    """
-    countries = []
-    for line in readed_lines:
-        country = get_country(line)  # Crea el país.
-        add_in_order(countries, country)  # Lo añade de manera ordenada al arreglo.
-
-    return countries
-
-
 def get_most_winning_country(countries):
     max_wins = 0
     most_winning_country = None
@@ -179,7 +110,7 @@ def get_countries_in_confederation(confederation_code, countries):
     countries_in_confederation = []
     for country in countries:
         if country.confederation == confederation_code:
-            add_in_order(countries_in_confederation, country)
+            fileManager.add_in_order(countries_in_confederation, country)
 
     return countries_in_confederation
 
@@ -211,17 +142,15 @@ def get_countries_from_file(path):
 
     return countries
 
-def validate_and_return_country(text, countries):
 
+def validate_and_return_country(text, countries):
     name = input(text)
     validado = False
-
-    while validado == False:
+    while not validado:
 
         for i in countries:
 
             if name == i:
-
                 print_green_text('\nPaís validado.')
                 return i
 
@@ -229,22 +158,18 @@ def validate_and_return_country(text, countries):
         name = input(text)
 
 
-
 def new_fixture(countries):
-
     fixture = 4 * [None]
 
-    #Generamos un arreglo solo con los nombres de los países para poder manipularlos mejor.
+    # Generamos un arreglo solo con los nombres de los países para poder manipularlos mejor.
     nombres = get_countries_names(countries)
 
     for i in range(len(fixture)):
-
         fixture[i] = 8 * [None]
 
     print(fixture)
 
     org = validate_and_return_country('Ingrese el nombre del país organizador: ', nombres)
-
     fixture[0][0] = org
     nombres.remove(org)
 
@@ -255,8 +180,7 @@ def new_fixture(countries):
     '''
 
     for i in range(7):
-
-        fixture[0][i+1] = nombres.pop(0)
+        fixture[0][i + 1] = nombres.pop(0)
 
     '''
     Obtenemos los países restantes de forma aleatoria entre los 28 mejores.
@@ -269,7 +193,6 @@ def new_fixture(countries):
 
         best_countries.append(nombres.pop(0))
 
-
     for i in range(1, len(fixture)):
 
         for j in range(len(fixture[i])):
@@ -280,11 +203,10 @@ def new_fixture(countries):
 
     return fixture
 
+
 def search_in_fixture(fixture, countries):
-
-    #Generamos un arreglo solo con los nombres de los países para poder manipularlos mejor.
+    # Generamos un arreglo solo con los nombres de los países para poder manipularlos mejor.
     nombres = get_countries_names(countries)
-
     country = validate_and_return_country('Ingrese el nombre del país a buscar: ', nombres)
 
     groups = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')

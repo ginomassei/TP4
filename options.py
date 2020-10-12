@@ -1,4 +1,5 @@
 import functions as f
+import fileManager as file
 import os.path
 
 
@@ -8,9 +9,7 @@ def option0():
 
 
 def option1():
-    countries = f.load_text_file_on_memory('paises.csv')
-    countries = f.get_countries(countries)
-
+    countries = file.generate_array('paises.csv')
     f.print_green_text('Archivo cargado en memoria correctamente.')
 
     return countries
@@ -43,7 +42,6 @@ def option4(countries):
     if len(countries) != 0:
 
         wcpc = f.get_winning_countries_per_confederation(countries)
-
         f.print_green_text(f'Países de la UEFA que han ganado algún campeonato: {wcpc[0]}')
         f.print_green_text(f'Países de la CONMEBOL que han ganado algún campeonato: {wcpc[1]}')
         f.print_green_text(f'Países de la CONCACAF que han ganado algún campeonato: {wcpc[2]}')
@@ -113,29 +111,22 @@ def option6(countries):
     else:
         f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
 
+
 def option7(countries):
-
     if len(countries) != 0:
-
         fixture = f.new_fixture(countries)
-
         f.print_blue_text('\nEl fixture ha sido generado correctamente.')
-
         return fixture
 
     else:
         f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
 
+
 def option8(fixture, countries):
-
     if len(countries) != 0:
-
         if len(fixture) != 0:
-
             f.search_in_fixture(fixture, countries)
-
         else:
             f.print_red_text('El fixture del mundial aún no ha sido generado, por favor cárguelo con la opción 7.')
-
     else:
         f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
