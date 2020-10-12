@@ -122,35 +122,32 @@ def validate_and_return_country(text, countries):
         name = input(text)
 
 
-def new_fixture(countries):
-    fixture = 4 * [None]
-
+def get_new_fixture(countries):
+    groups_number = 8
+    participants_per_group = 4
     # Generamos un arreglo solo con los nombres de los países para poder manipularlos mejor.
     nombres = get_countries_names(countries)
 
-    for i in range(len(fixture)):
-        fixture[i] = 8 * [None]
-
+    fixture = [[None] * groups_number for i in range(participants_per_group)]
+    
     org = validate_and_return_country('Ingrese el nombre del país organizador: ', nombres)
     fixture[0][0] = org
     nombres.remove(org)
-
+    
     '''
     Obtenemos los cabeza de serie (el arreglo original se ordenó previamente por puntaje de mayor a menor) y los
     eliminamos para evitar repeticiones.
     El índice del país a retornar es siempre 0 ya que se van desplazando los elementos restantes.
     '''
 
-    for i in range(7):
+    for i in range(groups_number - 1):
         fixture[0][i + 1] = nombres.pop(0)
 
     '''
     Obtenemos los países restantes de forma aleatoria entre los 28 mejores.
     Para ello generamos un arreglo que contenga a estos 28 mejores.
     '''
-
     best_countries = []
-
     for i in range(28):
         best_countries.append(nombres.pop(0))
 
@@ -178,3 +175,18 @@ def search_in_fixture(fixture, countries):
                 return
 
     print_green_text(f'\nLamentablemente, {country} no participa del mundial este año.')
+
+
+def show_fixture(fixture):
+    header = "| {:^15} " * 8 + "|"
+    header = header.format('Grupo A', 'Grupo B', 'Grupo C', 'Grupo D', 'Grupo E', 'Grupo F', 'Grupo G', 'Grupo H')
+
+    print('-' * 145)
+    print(header)
+    print('-' * 145)
+
+    for row in fixture:
+        s = "| {:^15} " * 8 + "|"
+        s = s.format(str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]), str(row[5]), str(row[6]), str(row[7]))
+        print(s)
+        print('-' * 145)

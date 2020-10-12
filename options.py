@@ -105,8 +105,10 @@ def option6(countries):
 
 def option7(countries):
     if len(countries) != 0:
-        fixture = f.new_fixture(countries)
-        f.print_blue_text('\nEl fixture ha sido generado correctamente.')
+        fixture = f.get_new_fixture(countries)
+        f.print_blue_text('\nEl fixture ha sido generado correctamente.\n')
+
+        f.show_fixture(fixture)
         return fixture
 
     else:
