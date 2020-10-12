@@ -1,5 +1,6 @@
 import os
 import country
+import pickle
 
 
 def generate_array(path):
@@ -49,3 +50,31 @@ def add_in_order(v, r):
         pos = izq
 
     v[pos:pos] = [r]
+
+
+def create_binary_file(array, path):
+    file = open(path, 'wb')
+
+    for element in array:
+        pickle.dump(element, file)
+
+    file.close()
+
+
+def get_countries_from_file(path):
+    countries = []
+
+    file = open(path, 'rb')
+    size = os.path.getsize(path)
+
+    while file.tell() < size:
+        countries.append(pickle.load(file))
+
+    file.close()
+
+    return countries
+
+
+def delete_atribute(atribute, array):
+    for element in array:
+        delattr(element, atribute)
