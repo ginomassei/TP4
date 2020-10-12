@@ -38,22 +38,19 @@ def option3(countries):
 
 
 def option4(countries):
+    confederations = ('UEFA', 'CONMEBOL', 'CONCACAF', 'CAF', 'AFC', 'OFC')
     if len(countries) != 0:
-
         wcpc = f.get_winning_countries_per_confederation(countries)
-        f.print_green_text(f'Países de la UEFA que han ganado algún campeonato: {wcpc[0]}')
-        f.print_green_text(f'Países de la CONMEBOL que han ganado algún campeonato: {wcpc[1]}')
-        f.print_green_text(f'Países de la CONCACAF que han ganado algún campeonato: {wcpc[2]}')
-        f.print_green_text(f'Países de la CAF que han ganado algún campeonato: {wcpc[3]}')
-        f.print_green_text(f'Países de la AFC que han ganado algún campeonato: {wcpc[4]}')
-        f.print_green_text(f'Países de la OFC que han ganado algún campeonato: {wcpc[5]}')
+        for i in range(len(wcpc)):
+            wins = f.count_winning_countries(wcpc[i])
+            string = f'Países de la {confederations[i]} que han ganado algún campeonato: {wins}'
+            f.print_blue_text(string)
 
     else:
         f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')
 
 
 def option5(countries):
-
     if len(countries) != 0:
 
         confederation_code, confederation_name = f.validate_confederation()

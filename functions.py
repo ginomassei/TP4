@@ -47,14 +47,11 @@ def get_most_winning_country(countries):
 
 
 def get_winning_countries_per_confederation(countries):
-    uefa = count_winning_countries(get_countries_in_confederation(0, countries))
-    conmebol = count_winning_countries(get_countries_in_confederation(1, countries))
-    concacaf = count_winning_countries(get_countries_in_confederation(2, countries))
-    caf = count_winning_countries(get_countries_in_confederation(3, countries))
-    afc = count_winning_countries(get_countries_in_confederation(4, countries))
-    ofc = count_winning_countries(get_countries_in_confederation(5, countries))
+    countries_per_confederation = [0] * 6
+    for i in range(len(countries_per_confederation)):
+        countries_per_confederation[i] = get_countries_in_confederation(i, countries)
 
-    return [uefa, conmebol, concacaf, caf, afc, ofc]
+    return countries_per_confederation
 
 
 def count_winning_countries(countries):
@@ -114,11 +111,9 @@ def get_countries_in_confederation(confederation_code, countries):
 
 def validate_and_return_country(text, countries):
     name = input(text)
-    validado = False
-    while not validado:
-
+    validated = False
+    while not validated:
         for i in countries:
-
             if name == i:
                 print_green_text('\nPaís validado.')
                 return i
@@ -159,13 +154,10 @@ def new_fixture(countries):
     best_countries = []
 
     for i in range(28):
-
         best_countries.append(nombres.pop(0))
 
     for i in range(1, len(fixture)):
-
         for j in range(len(fixture[i])):
-
             picked_country = random.choice(best_countries)
             fixture[i][j] = picked_country
             best_countries.remove(picked_country)
@@ -181,9 +173,7 @@ def search_in_fixture(fixture, countries):
     groups = ('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H')
 
     for i in range(len(fixture)):
-
         for j in range(len(fixture[i])):
-
             if fixture[i][j] == country:
 
                 print_green_text(f'\nPaís encontrado. {country} pertenece al grupo {groups[j]}')
