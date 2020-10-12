@@ -1,5 +1,6 @@
 import os
-from options import *
+import options
+import functions as f
 
 
 def main():
@@ -27,32 +28,32 @@ def main():
         print()
 
         if option == 0:
-            option0()
+            options.option0()
             return 0
 
         if option == 1:
-            countries = option1()
+            countries = options.option1()
 
         elif option == 2:
-            option2(countries)
+            options.option2(countries)
 
         elif option == 3:
-            option3(countries)
+            options.option3(countries)
 
         elif option == 4:
-            option4(countries)
+            options.option4(countries)
 
         elif option == 5:
-            option5(countries)
+            options.option5(countries)
 
         elif option == 6:
-            option6(countries)
+            options.option6(countries)
 
         elif option == 7:
-            fixture = option7(countries)
+            fixture = options.option7(countries)
 
         elif option == 8:
-            option8(fixture, countries)
+            options.option8(fixture, countries)
 
         else:
             f.print_red_text('Opción no válida')
