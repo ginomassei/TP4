@@ -131,8 +131,6 @@ def new_fixture(countries):
     for i in range(len(fixture)):
         fixture[i] = 8 * [None]
 
-    print(fixture)
-
     org = validate_and_return_country('Ingrese el nombre del país organizador: ', nombres)
     fixture[0][0] = org
     nombres.remove(org)
