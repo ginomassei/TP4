@@ -4,7 +4,6 @@ import country
 
 def generate_array(path):
     loaded_array = []
-
     if not os.path.exists(path):
         # Checkea la existencia del archivo, si no existe, retorna el arreglo vacío.
         return loaded_array
