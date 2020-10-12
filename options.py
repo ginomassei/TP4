@@ -52,23 +52,23 @@ def option4(countries):
 
 def option5(countries):
     if len(countries) != 0:
-
         confederation_code, confederation_name = f.validate_confederation()
         countries_per_confederation = f.get_countries_in_confederation(confederation_code, countries)
 
-        file.delete_atribute('confederation', countries_per_confederation)
+        temp = countries_per_confederation[:]
+        file.delete_atribute('confederation', temp)
 
         f.print_blue_text(f'\nListado de paises de la confederación {confederation_name}\n')
-        for i in countries_per_confederation:
+        for i in temp:
             print(i)
 
         path = f'clasificacion{confederation_code}.dat'
-        file.create_binary_file(countries_per_confederation, path)
+        file.create_binary_file(temp, path)
 
         f.print_green_text('\nArchivo generado correctamente.')
 
         print(f'\nNombre: {path}')
-        print(f'Se cargaron {len(countries_per_confederation)} registros al archivo.')
+        print(f'Se cargaron {len(temp)} registros al archivo.')
 
     else:
         f.print_red_text('No se encuentra ningún registro en memoria, por favor cárguelo con la opcion 1.')

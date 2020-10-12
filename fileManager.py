@@ -54,7 +54,6 @@ def add_in_order(v, r):
 
 def create_binary_file(array, path):
     file = open(path, 'wb')
-
     for element in array:
         pickle.dump(element, file)
 
