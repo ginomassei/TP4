@@ -38,7 +38,6 @@ def option3(countries):
 
 
 def option4(countries):
-
     if len(countries) != 0:
 
         wcpc = f.get_winning_countries_per_confederation(countries)
@@ -60,14 +59,14 @@ def option5(countries):
         confederation_code, confederation_name = f.validate_confederation()
         countries_per_confederation = f.get_countries_in_confederation(confederation_code, countries)
 
-        f.delete_atribute('confederation', countries_per_confederation)
+        file.delete_atribute('confederation', countries_per_confederation)
 
         f.print_blue_text(f'\nListado de paises de la confederación {confederation_name}\n')
         for i in countries_per_confederation:
             print(i)
 
         path = f'clasificacion{confederation_code}.dat'
-        f.create_binary_file(countries_per_confederation, path)
+        file.create_binary_file(countries_per_confederation, path)
 
         f.print_green_text('\nArchivo generado correctamente.')
 
@@ -79,29 +78,24 @@ def option5(countries):
 
 
 def option6(countries):
-
     if len(countries) != 0:
 
         confederation_code, confederation_name = f.validate_confederation()
         path = f'clasificacion{confederation_code}.dat'
 
         if not os.path.exists(path):
-
             countries_per_confederation = f.get_countries_in_confederation(confederation_code, countries)
-
-            f.delete_atribute('confederation', countries_per_confederation)
-
-            f.create_binary_file(countries_per_confederation, path)
+            file.delete_atribute('confederation', countries_per_confederation)
+            file.create_binary_file(countries_per_confederation, path)
 
             f.print_red_text(f'\nEl archivo de la confederación {confederation_name} no había sido generado.')
-
             f.print_green_text('\nArchivo generado correctamente.')
 
             print(f'\nNombre: {path}')
             print(f'Se cargaron {len(countries_per_confederation)} registros al archivo.')
 
         else:
-            file_countries = f.get_countries_from_file(path)
+            file_countries = file.get_countries_from_file(path)
             f.print_green_text('Archivo encontrado\n')
             f.print_blue_text(f'Clasificación de la confederación {confederation_name}:\n')
 

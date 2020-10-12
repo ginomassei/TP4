@@ -1,6 +1,5 @@
 import os
 import pickle
-import country
 import random
 import fileManager
 
@@ -62,9 +61,7 @@ def count_winning_countries(countries):
     c = 0
     for country in countries:
         if country.wins > 0:
-
             c += 1
-
     return c
 
 
@@ -113,34 +110,6 @@ def get_countries_in_confederation(confederation_code, countries):
             fileManager.add_in_order(countries_in_confederation, country)
 
     return countries_in_confederation
-
-
-def create_binary_file(array, path):
-    file = open(path, 'wb')
-
-    for element in array:
-        pickle.dump(element, file)
-
-    file.close()
-
-
-def delete_atribute(atribute, array):
-    for element in array:
-        delattr(element, atribute)
-
-
-def get_countries_from_file(path):
-    countries = []
-
-    file = open(path, 'rb')
-    size = os.path.getsize(path)
-
-    while file.tell() < size:
-        countries.append(pickle.load(file))
-
-    file.close()
-
-    return countries
 
 
 def validate_and_return_country(text, countries):
