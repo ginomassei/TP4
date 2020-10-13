@@ -61,7 +61,7 @@ def main():
         print('-' * 80)
 
         input(f.red_string('Presione la tecla enter para volver al menú de opciones > '))
-        os.system('cls' if os.name == 'nt' else 'clear')  # Limpia el contenido de la terminal.
+        print()
 
 
 if __name__ == "__main__":
