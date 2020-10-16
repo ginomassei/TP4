@@ -114,7 +114,7 @@ def validate_and_return_country(text, countries):
     validated = False
     while not validated:
         for i in countries:
-            if name == i:
+            if name.lower() == i.lower():
                 print_green_text('\nPaís validado.')
                 return i
 
